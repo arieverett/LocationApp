@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct LocationAppApp: App {
+    @State private var store = LocationStore()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LocationsListView()
+                .environment(store)
         }
     }
 }
