@@ -4,6 +4,17 @@ A simple iOS app for saving and exploring your favorite locations — built with
 
 ---
 
+## Screenshots
+
+<p float="left">
+  <img src="screenshots/LocationApp%20-%20Location%20List.jpg" width="22.3%" />
+  <img src="screenshots/LocationApp%20-%20Locations.jpg" width="19.8%" />
+  <img src="screenshots/LocationApp%20-%20Map.jpg" width="22%" />
+  <img src="screenshots/LocationApp%20-%20Hello%2C%20world!.jpg" width="19.9%" />
+</p>
+
+---
+
 ## What it does
 
 - 📌 Save your current location with one tap
@@ -35,5 +46,3 @@ A simple iOS app for saving and exploring your favorite locations — built with
 
 Made by **Ari Everett** — CS Junior @ ASU 🤘  
 AME 495: Mobile Development | Spring 2026
-
-[Uploading mockups.html…]()
