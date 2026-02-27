@@ -31,6 +31,8 @@ struct LocationsListView: View {
                     if !store.locations.isEmpty {
                         EditButton()
                     }
+                    
+// test for github push
                 }
 
                 ToolbarItem(placement: .topBarTrailing) {
