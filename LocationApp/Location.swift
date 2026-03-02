@@ -14,6 +14,7 @@ struct Location: Identifiable, Codable, Hashable {
     var coordinate: Coordinate2D
     var mapDelta: Double
     var name: String
+    var description: String
     
     var position: MapCameraPosition {
         get {
@@ -27,7 +28,7 @@ struct Location: Identifiable, Codable, Hashable {
     
     static func example() -> Location {
         let coordinate = Coordinate2D(latitude: 33.4255, longitude: -111.9400)
-        let tempe = Location(id: UUID(), coordinate: coordinate, mapDelta: 0.05, name: "Tempe")
+        let tempe = Location(id: UUID(), coordinate: coordinate, mapDelta: 0.05, name: "Tempe", description: "")
         return tempe
     }
 }

@@ -24,6 +24,14 @@ struct NewLocationView: View {
                         Label("Use Current Location", systemImage: "location.fill")
                     })
                 }
+                
+                Section("Add by Search") {
+                    Button(action: {
+                        // search action
+                    }, label: {
+                        Label("Search for a Place", systemImage: "magnifyingglass")
+                    })
+                }
             }
             .navigationTitle("Add Location")
             .navigationBarTitleDisplayMode(.inline)
@@ -65,7 +73,7 @@ struct NewLocationView: View {
         
             
             let coord2d = Coordinate2D(coordinate)
-            let location = Location(id: UUID(), coordinate: coord2d, mapDelta: 0.01, name: name)
+            let location = Location(id: UUID(), coordinate: coord2d, mapDelta: 0.01, name: name, description: "")
             store.add(location: location)
             dismiss()
         }

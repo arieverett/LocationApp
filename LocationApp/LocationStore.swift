@@ -33,6 +33,12 @@ class LocationStore {
         save()
     }
     
+    func update(location: Location) {
+        guard let index = locations.firstIndex(where: {$0.id == location.id}) else {return}
+        locations[index] = location
+        save()
+    }
+    
     private func save() {
         do {
             let codedLocations = try PropertyListEncoder().encode(locations)
