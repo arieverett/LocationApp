@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct PhotoAssetView: View {
     var photo: PhotoAsset
@@ -58,7 +59,7 @@ struct PhotoAssetView: View {
             PhotoAsset(
                 id: UUID(),
                 filename: "preview.jpg",
-                contentType: .jpeg
+                contentType: UTType.jpeg
             )
         ]
     )

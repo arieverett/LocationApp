@@ -49,7 +49,7 @@ struct LocationsListView: View {
             .overlay {
                 if store.locations.isEmpty {
                     ContentUnavailableView(label: {
-                        Label("No Locations", systemImage: "mappin.slash")
+                        Label("No Locations", systemImage: "mappin.slash")#imageLiteral(resourceName: "simulator_screenshot_57DC35F5-87FF-4884-A645-F87B5B4E1F25.png")
                     })
                 }
             }
