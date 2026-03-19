@@ -12,6 +12,7 @@ import SwiftUI
 class LocationStore {
     var locations: [Location] = []
 
+    // added this initializer to default to a location and avoid white screen of death on start up
     init() {
         if let savedLocations = load() {
             locations = savedLocations
