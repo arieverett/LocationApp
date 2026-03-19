@@ -11,53 +11,62 @@ import SwiftUI
 @Observable
 class LocationStore {
     var locations: [Location] = []
-    
-    private let archiveURL = URL.documentsDirectory.appendingPathComponent("locations.plist")
-    
+
     init() {
-        load()
+        if let savedLocations = load() {
+            locations = savedLocations
+        } else {
+            locations = [Location.example()]
+        }
     }
-    
+
     func add(location: Location) {
         locations.append(location)
         save()
     }
-    
-    func delete(at offsets: IndexSet) {
+
+    func update(location: Location) {
+        if let index = locations.firstIndex(where: { $0.id == location.id }) {
+            locations[index] = location
+            save()
+        }
+    }
+
+    func remove(atOffsets offsets: IndexSet) {
+        for offset in offsets {
+            for photo in locations[offset].photos {
+                photo.deleteFile()
+            }
+        }
+
         locations.remove(atOffsets: offsets)
         save()
     }
-    
-    func move(from source: IndexSet, to destination: Int) {
+
+    func move(fromOffsets source: IndexSet, toOffset destination: Int) {
         locations.move(fromOffsets: source, toOffset: destination)
         save()
     }
-    
-    func update(location: Location) {
-        guard let index = locations.firstIndex(where: {$0.id == location.id}) else {return}
-        locations[index] = location
-        save()
-    }
-    
-    private func save() {
+
+    func save() {
         do {
-            let codedLocations = try PropertyListEncoder().encode(locations)
-            try codedLocations.write(to: archiveURL)
+            let data = try JSONEncoder().encode(locations)
+            UserDefaults.standard.set(data, forKey: "SavedLocations")
         } catch {
-            print("Failed to save locations: \(error.localizedDescription)")
+            print("Failed to save locations: \(error)")
         }
     }
-    
-    private func load() {
-        guard FileManager.default.fileExists(atPath: archiveURL.path) else {
-            return
+
+    func load() -> [Location]? {
+        guard let data = UserDefaults.standard.data(forKey: "SavedLocations") else {
+            return nil
         }
-        
+
         do {
-            let codedLocations = try Data(contentsOf: archiveURL)
-            locations = try PropertyListDecoder().decode([Location].self, from: codedLocations)
+            return try JSONDecoder().decode([Location].self, from: data)
         } catch {
-            print("Failed to load locations: \(error.localizedDescription)")
+            print("Failed to load locations: \(error)")
+            return nil
         }
     }
 }

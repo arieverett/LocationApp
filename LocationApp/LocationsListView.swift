@@ -31,8 +31,6 @@ struct LocationsListView: View {
                     if !store.locations.isEmpty {
                         EditButton()
                     }
-                    
-// test for github push
                 }
 
                 ToolbarItem(placement: .topBarTrailing) {
@@ -48,26 +46,25 @@ struct LocationsListView: View {
             }
             .overlay {
                 if store.locations.isEmpty {
-                    ContentUnavailableView(label: {
-                        Label("No Locations", systemImage: "mappin.slash")#imageLiteral(resourceName: "simulator_screenshot_57DC35F5-87FF-4884-A645-F87B5B4E1F25.png")
-                    })
+                    ContentUnavailableView(
+                        "No Locations",
+                        systemImage: "mappin.slash"
+                    )
                 }
             }
         }
     }
-    
+
     func deleteLocations(offsets: IndexSet) {
-        store.delete(at: offsets)
+        store.remove(atOffsets: offsets)
     }
-    
-    func moveLocations(from source: IndexSet, to destination: Int) {
-        store.move(from: source, to: destination)
+
+    func moveLocations(source: IndexSet, destination: Int) {
+        store.move(fromOffsets: source, toOffset: destination)
     }
 }
 
-struct LocationsListView_Previews: PreviewProvider {
-    static var previews: some View {
-        LocationsListView()
-            .environment(LocationStore())
-    }
+#Preview {
+    LocationsListView()
+        .environment(LocationStore())
 }
