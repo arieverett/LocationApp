@@ -13,7 +13,7 @@ struct NewLocationView: View {
     @Environment(LocationStore.self) private var store
     @State private var locationManager = LocationManager()
     @Environment(\.dismiss) private var dismiss
-
+    
     var body: some View {
         NavigationStack {
             Form {
@@ -53,11 +53,11 @@ struct NewLocationView: View {
             locationManager.requestPermission()
         }
     }
-
+    
     private func requestCurrentLocation() {
         locationManager.requestLocation()
     }
-
+    
     private func createLocation(coordinate: CLLocationCoordinate2D) {
         Task {
             var name = "Current location"
@@ -70,10 +70,17 @@ struct NewLocationView: View {
                     name = locationName
                 }
             }
-        
             
             let coord2d = Coordinate2D(coordinate)
-            let location = Location(id: UUID(), coordinate: coord2d, mapDelta: 0.01, name: name, description: "")
+            let location = Location(
+                id: UUID(),
+                coordinate: coord2d,
+                mapDelta: 0.01,
+                name: name,
+                description: "",
+                photos: []
+            )
+            
             store.add(location: location)
             dismiss()
         }
@@ -84,5 +91,5 @@ struct NewLocationView_Previews: PreviewProvider {
     static var previews: some View {
         NewLocationView()
             .environment(LocationStore())
-    }      
+    }
 }
